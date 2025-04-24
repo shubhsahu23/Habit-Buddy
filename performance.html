@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today's Performance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .progress-ring {
+      transform: rotate(-90deg);
+    }
+    .progress-ring__circle {
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .performance-card {
+      transition: all 0.3s ease;
+    }
+    .performance-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Today's Performance</h1>
+    
+    <!-- Main Performance Circle -->
+    <div class="performance-card bg-white rounded-xl p-6 shadow-md text-center mb-6">
+      <div class="relative w-48 h-48 mx-auto mb-4">
+        <svg class="progress-ring w-full h-full" viewBox="0 0 100 100">
+          <!-- Background circle -->
+          <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50"/>
+          <!-- Progress circle -->
+          <circle class="progress-ring__circle text-blue-500" 
+                  stroke-width="8" 
+                  stroke-linecap="round"
+                  stroke="currentColor" 
+                  fill="transparent" 
+                  r="40" 
+                  cx="50" 
+                  cy="50"
+                  stroke-dasharray="251.2"
+                  stroke-dashoffset="calc(251.2 - (251.2 * var(--percentage)) / 100)"/>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span id="todayPercentage" class="text-4xl font-bold text-gray-800">0%</span>
+          <span class="text-gray-500">Today</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <p class="text-gray-600">Goal: <span class="font-semibold">80%</span></p>
+      </div>
+    </div>
+    
+    <!-- Performance Breakdown -->
+    <div class="grid grid-cols-3 gap-4 mb-6">
+      <div class="performance-card bg-white rounded-lg p-4 shadow text-center">
+        <p class="text-sm text-gray-500 mb-1">Last Week</p>
+        <p class="text-xl font-bold text-gray-800">64%</p>
+      </div>
+      <div class="performance-card bg-white rounded-lg p-4 shadow text-center">
+        <p class="text-sm text-gray-500 mb-1">This Week</p>
+        <p class="text-xl font-bold text-gray-800">66%</p>
+      </div>
+      <div class="performance-card bg-white rounded-lg p-4 shadow text-center">
+        <p class="text-sm text-gray-500 mb-1">All Time</p>
+        <p class="text-xl font-bold text-gray-800">64%</p>
+      </div>
+    </div>
+    
+    <!-- Detailed Stats -->
+    <div class="performance-card bg-white rounded-xl p-6 shadow">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Detailed Progress</h2>
+      <div class="space-y-3">
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Completed habits</span>
+            <span id="completedCount">0/5</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="completedBar" class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Partially completed</span>
+            <span id="partialCount">0/5</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="partialBar" class="bg-yellow-500 h-2 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Missed habits</span>
+            <span id="missedCount">0/5</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="missedBar" class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample data - replace with your actual data
+    const performanceData = {
+      today: 72, // Today's completion percentage
+      lastWeek: 64,
+      thisWeek: 66,
+      allTime: 64,
+      habits: {
+        total: 5,
+        completed: 3,
+        partial: 1,
+        missed: 1
+      }
+    };
+
+    // Update the progress circle
+    function updateProgress() {
+      const circle = document.querySelector('.progress-ring__circle');
+      const percentage = performanceData.today;
+      
+      // Set CSS variable for the circle
+      document.documentElement.style.setProperty('--percentage', percentage);
+      
+      // Update percentage text
+      document.getElementById('todayPercentage').textContent = `${percentage}%`;
+      
+      // Update detailed stats
+      document.getElementById('completedCount').textContent = 
+        `${performanceData.habits.completed}/${performanceData.habits.total}`;
+      document.getElementById('partialCount').textContent = 
+        `${performanceData.habits.partial}/${performanceData.habits.total}`;
+      document.getElementById('missedCount').textContent = 
+        `${performanceData.habits.missed}/${performanceData.habits.total}`;
+      
+      // Update progress bars
+      document.getElementById('completedBar').style.width = 
+        `${(performanceData.habits.completed / performanceData.habits.total) * 100}%`;
+      document.getElementById('partialBar').style.width = 
+        `${(performanceData.habits.partial / performanceData.habits.total) * 100}%`;
+      document.getElementById('missedBar').style.width = 
+        `${(performanceData.habits.missed / performanceData.habits.total) * 100}%`;
+    }
+
+    // Animate on load
+    setTimeout(() => {
+      updateProgress();
+    }, 300);
+
+    // You can update the data dynamically like this:
+    // performanceData.today = newPercentage;
+    // updateProgress();
+  </script>
+</body>
+</html>

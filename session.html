@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<!-- Navbar -->
+<nav class="bg-white/70 backdrop-blur-md shadow-md w-full fixed top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Logo -->
+      <div class="flex justify-center space-x-12 items-center h-16 ">
+        <div class=" text-2xl font-bold text-blue-600"><a href="index.php">HabitBuddy</a></div>
+      <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-6">
+            <a href="calendar.html" class="text-gray-700 hover:text-blue-600">Calendar</a>
+            <a href="session.html" class="underline underline-offset-8 text-blue-600">Session</a>
+            <a href="about.html" class="text-gray-700 hover:text-blue-600">About Us</a>
+            <a href="contact.html" class="text-gray-700 hover:text-blue-600">Contact Us</a>
+            <a href="review.php" class="text-gray-700 hover:text-blue-600">Reviews</a>
+        </div>
+      <!-- Mobile Toggle Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+   <!-- Mobile Menu -->
+   <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+    <a href="calendar.html" class="block text-gray-700 hover:text-blue-600">Calendar</a>
+    <a href="session.html" class="block text-gray-700 hover:text-blue-600">Session</a>
+    <a href="about.html" class="block text-gray-700 hover:text-blue-600">About Us</a>
+    <a href="contact.html" class="block text-gray-700 hover:text-blue-600">Contact Us</a>
+    <a href="review.php" class="block text-gray-700 hover:text-blue-600">Reviews</a>
+  </div>
+</nav>
+  <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      });
+  </script>
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
+      
+          <!-- Habit Planner -->
+          <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md text-center">
+            <h2 class="text-2xl font-bold mb-6 text-green-700">Plan a Habit Block</h2>
+            <form id="plannerForm" class="space-y-4 mb-4">
+              <input type="email" name="email" id="email" placeholder="Your Email (to get reminder)"
+                class="border border-gray-300 p-3 rounded-md w-full text-center focus:outline-none focus:ring-2 focus:ring-green-400" required>
+              <input type="text" name="habit" id="plannedHabit" placeholder="Habit Name (e.g. Reading)"
+                class="border border-gray-300 p-3 rounded-md w-full text-center focus:outline-none focus:ring-2 focus:ring-green-400" required>
+              <input type="time" name="time" id="startTime"
+                class="border border-gray-300 p-3 rounded-md w-full text-center focus:outline-none focus:ring-2 focus:ring-green-400" required>
+              <input type="number" name="duration" id="plannedDuration" placeholder="Duration (minutes)"
+                class="border border-gray-300 p-3 rounded-md w-full text-center focus:outline-none focus:ring-2 focus:ring-green-400" required>
+          
+              <label class="flex items-center justify-center gap-2 text-sm text-gray-600">
+                <input type="checkbox" name="reminder" id="reminderToggle" class="form-checkbox text-green-600">
+                Enable Reminder
+              </label>
+          
+              <button type="submit"
+                class="bg-green-600 hover:bg-green-700 transition text-white font-medium px-4 py-2 rounded-md w-full">
+                Save Habit Plan
+              </button>
+            </form>
+          
+            <div id="plannedMessage" class="text-green-600 font-semibold hidden"></div>
+          </div>
+          
+          <script>
+          document.getElementById('plannerForm').addEventListener('submit', function(e) {
+              e.preventDefault();
+              
+              const form = e.target;
+              const formData = new FormData(form);
+              const messageDiv = document.getElementById('plannedMessage');
+              
+              fetch('send_reminder.php', {
+                  method: 'POST',
+                  body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                  messageDiv.textContent = data.message;
+                  messageDiv.classList.remove('hidden');
+                  
+                  if (data.success) {
+                      messageDiv.className = 'text-green-600 font-semibold';
+                      form.reset();
+                  } else {
+                      messageDiv.className = 'text-red-600 font-semibold';
+                  }
+                  
+                  // Hide message after 5 seconds
+                  setTimeout(() => {
+                      messageDiv.classList.add('hidden');
+                  }, 5000);
+              })
+              .catch(error => {
+                  messageDiv.textContent = 'An error occurred. Please try again.';
+                  messageDiv.className = 'text-red-600 font-semibold';
+                  messageDiv.classList.remove('hidden');
+              });
+          });
+          </script>
+      
+          <!-- Focus Timer -->
+          <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md text-center">
+            <h1 class="text-2xl font-bold mb-6 text-blue-700">Set Your Focus Time</h1>
+            <form id="timerForm" class="space-y-4">
+              <input type="text" id="habitName" placeholder="Enter Habit (e.g. Study, Workout)"
+                class="border border-gray-300 p-3 rounded-md w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+              <div class="flex justify-center gap-4">
+                <input type="number" id="hours" min="0" placeholder="Hours"
+                  class="border border-gray-300 p-3 rounded-md w-24 text-center focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="number" id="minutes" min="0" max="59" placeholder="Minutes"
+                  class="border border-gray-300 p-3 rounded-md w-24 text-center focus:outline-none focus:ring-2 focus:ring-blue-400">
+              </div>
+              <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 transition text-white font-medium px-4 py-2 rounded-md w-full">
+                Start Countdown
+              </button>
+            </form>
+      
+            <div id="countdownContainer" class="mt-8 hidden">
+              <h2 id="habitDisplay" class="text-xl font-semibold mb-2 text-gray-700"></h2>
+              <div id="countdown" class="text-4xl font-bold mb-4 text-blue-800">00:00:00</div>
+              <div id="quote" class="italic text-gray-500 text-sm"></div>
+            </div>
+          </div>
+      
+        </div>
+      </div>        
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("timerForm");
+  const countdownEl = document.getElementById("countdown");
+  const countdownContainer = document.getElementById("countdownContainer");
+  const habitDisplay = document.getElementById("habitDisplay");
+  const quoteDisplay = document.getElementById("quote");
+
+  const quotes = [
+    "Stay focused, stay strong!",
+    "Every second counts!",
+    "Push yourself, because no one else is going to do it for you.",
+    "Discipline is the bridge between goals and accomplishment.",
+    "Success doesn’t come from what you do occasionally. It comes from what you do consistently.",
+    "Small progress is still progress.",
+    "You’ve got this!",
+    "Don’t stop when you’re tired. Stop when you’re done."
+  ];
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const hours = parseInt(document.getElementById("hours").value) || 0;
+    const minutes = parseInt(document.getElementById("minutes").value) || 0;
+    const habitName = document.getElementById("habitName").value.trim();
+
+    let totalSeconds = (hours * 60 + minutes) * 60;
+
+    if (totalSeconds <= 0 || !habitName) {
+      alert("Please enter valid time and habit name.");
+      return;
+    }
+
+    habitDisplay.textContent = `You're now focusing on: ${habitName}`;
+    countdownContainer.classList.remove("hidden");
+    form.classList.add("hidden");
+
+    enterFullScreen();
+    startCountdown(totalSeconds);
+    preventNavigation();
+    startMotivationQuotes();
+  });
+
+  function startCountdown(seconds) {
+    const countdown = setInterval(() => {
+      if (document.hidden) {
+        alert("Don't switch tabs! Stay committed.");
+      }
+
+      const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+      const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+      const s = (seconds % 60).toString().padStart(2, '0');
+
+      countdownEl.textContent = `${h}:${m}:${s}`;
+      seconds--;
+
+      if (seconds < 0) {
+        clearInterval(countdown);
+        exitFullScreen();
+        countdownEl.textContent = "Time's Up!";
+        quoteDisplay.textContent = "Great job completing your session! 🎉";
+        alert("You did it! Session complete.");
+        window.onbeforeunload = null;
+      }
+    }, 1000);
+  }
+
+  function startMotivationQuotes() {
+    let index = 0;
+    quoteDisplay.textContent = quotes[index];
+
+    setInterval(() => {
+      index = (index + 1) % quotes.length;
+      quoteDisplay.textContent = quotes[index];
+    }, 10000); // Every 10 seconds
+  }
+
+  function enterFullScreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+
+  function preventNavigation() {
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        alert("Stay on this page to complete your habit timer!");
+      }
+    });
+
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave? The timer is still running!";
+    };
+  }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const plannerForm = document.getElementById("plannerForm");
+  const plannedMessage = document.getElementById("plannedMessage");
+
+  plannerForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const habit = document.getElementById("plannedHabit").value;
+    const time = document.getElementById("startTime").value;
+    const duration = document.getElementById("plannedDuration").value;
+    const enableReminder = document.getElementById("reminderToggle").checked;
+
+    if (!enableReminder) {
+      plannedMessage.textContent = "Habit saved without reminder.";
+      plannedMessage.classList.remove("hidden");
+      return;
+    }
+
+    fetch("send_reminder.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        habit: habit,
+        time: time,
+        duration: duration
+      })
+    })
+    .then(response => response.text())
+    .then(data => {
+      plannedMessage.textContent = data;
+      plannedMessage.classList.remove("hidden");
+    })
+    .catch(error => {
+      plannedMessage.textContent = "Failed to send reminder.";
+      plannedMessage.classList.remove("hidden");
+      console.error("Error:", error);
+    });
+  });
+});
+
+  </script>
+</body>
+</html>

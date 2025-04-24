@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Inter', 'sans-serif']
+              }
+            }
+          }
+        }
+      </script>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .hero-pattern {
+            background-image: radial-gradient(#3b82f6 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .map-container {
+            height: 300px;
+        }
+        @media (min-width: 768px) {
+            .map-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+<!-- Navbar -->
+<nav class="bg-white/30 backdrop-blur-md shadow-md w-full fixed top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Logo -->
+        <div class="flex justify-center space-x-12 items-center h-16 ">
+          <div class=" text-2xl font-bold text-blue-600"><a href="index.php">HabitBuddy</a></div>
+        <!-- Desktop Menu -->
+          <div class="hidden md:flex space-x-6">
+                <a href="calendar.html" class="text-gray-700 hover:text-blue-600">Calendar</a>
+              <a href="session.html" class="text-gray-700 hover:text-blue-600">Session</a>
+              <a href="about.html" class="text-gray-700 hover:text-blue-600">About Us</a>
+              <a href="contact.html" class="underline underline-offset-8 text-blue-600">Contact Us</a>
+              <a href="review.php" class="text-gray-700 hover:text-blue-600">Reviews</a>
+          </div>
+        <!-- Mobile Toggle Button -->
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+          <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  
+     <!-- Mobile Menu -->
+     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="calendar.html" class="block text-gray-700 hover:text-blue-600">Calendar</a>
+      <a href="session.html" class="block text-gray-700 hover:text-blue-600">Session</a>
+      <a href="about.html" class="block text-gray-700 hover:text-blue-600">About Us</a>
+      <a href="contact.html" class="block text-gray-700 hover:text-blue-600">Contact Us</a>
+      <a href="review.php" class="block text-gray-700 hover:text-blue-600">Reviews</a>
+    </div>
+  </nav>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+  
+        menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    <!-- Hero Section -->
+    <section class="hero-pattern text-white py-20 pt-28">
+        <div class="container mx-auto px-6 text-center text-purple-800">
+            <h1 class="text-4xl font-bold mb-6">Contact HabitBuddy</h1>
+            <p class="text-xl  max-w-2xl mx-auto">We're students building this in our free time, but we'd love to hear from you!</p>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
+                    <form id="contactForm" class="space-y-6" action="send_mail.php" method="POST">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2">Your Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-2">Subject</label>
+                            <select id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="feedback">Feedback</option>
+                                <option value="support">Technical Support</option>
+                                <option value="suggestion">Feature Suggestion</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2">Your Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 w-full md:w-auto">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="formSuccess" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                        Thanks for your message! We'll get back to you soon.
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 md:pl-10">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Other Ways to Connect</h2>
+                    
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-1">Email Us</h3>
+                                <p class="text-gray-600">contact@habithero.app</p>
+                                <p class="text-gray-500 text-sm">(We check daily)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-twitter text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-1">Tweet Us</h3>
+                                <p class="text-gray-600">@HabitBuddyApp</p>
+                                <p class="text-gray-500 text-sm">(Fastest way to get a response)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-github text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-1">Contribute</h3>
+                                <p class="text-gray-600">github.com/habitbuddy</p>
+                                <p class="text-gray-500 text-sm">(Open to contributors)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold">Is HabitBuddy really free for students?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Yes! We're students ourselves and believe habit-tracking tools should be accessible to everyone. We have no plans to charge for basic features, though we might offer optional premium features in the future to help cover server costs.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold">How can I suggest new features?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">We love feature suggestions! The best way is to tweet us @HabitHeroApp or open an issue on our GitHub repository. We prioritize features that get the most student requests.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold">Can I use HabitBuddy for group projects?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Currently we focus on individual habit tracking, but we're working on study group features that will let you track shared habits with classmates. Expect this in our next big update!</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold">How can I contribute to the project?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">We welcome contributors! Check our GitHub for open issues labeled "good first issue" if you're new to open source. We also need help with documentation, design, and user research.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">HabitBuddy</h3>
+                    <p class="text-gray-400">Your personal habit companion.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="myhabit.php" class="text-gray-400 hover:text-white">Habit</a></li>
+                        <li><a href="session.html" class="text-gray-400 hover:text-white">Session</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                    </ul>
+                </div>
+                <!-- <div>
+                    <h4 class="text-lg font-semibold mb-4">Features</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Daily Tracking</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Reminders</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Progress Reports</a></li>
+                    </ul>
+                </div> -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+                    </div>
+                    <p class="text-gray-400">contact@habitbuddy.app</p>
+                    <p class="text-gray-400">Made with ❤️ by students</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 HabitBuddy.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // FAQ toggle
+        function toggleFAQ(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('transform');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>

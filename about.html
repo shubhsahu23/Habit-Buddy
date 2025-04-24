@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - HabitBuddy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+<nav class="bg-white/30 backdrop-blur-md shadow-md w-full fixed top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Logo -->
+      <div class="flex justify-center space-x-12 items-center h-16 ">
+        <div class=" text-2xl font-bold text-blue-600"><a href="index.php">HabitBuddy</a></div>
+      <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-6">
+              <a href="calendar.html" class="text-gray-700 hover:text-blue-600">Calendar</a>
+            <a href="session.html" class="text-gray-700 hover:text-blue-600">Session</a>
+            <a href="about.html" class="text-blue-700 underline underline-offset-8 hover:text-blue-600">About Us</a>
+            <a href="contact.html" class="text-gray-700 hover:text-blue-600">Contact Us</a>
+            <a href="review.php" class="text-gray-700 hover:text-blue-600">Reviews</a>
+        </div>
+      <!-- Mobile Toggle Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+   <!-- Mobile Menu -->
+   <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+    <a href="calendar.html" class="block text-gray-700 hover:text-blue-600">Calendar</a>
+    <a href="session.html" class="block text-gray-700 hover:text-blue-600">Session</a>
+    <a href="about.html" class="block text-gray-700 hover:text-blue-600">About Us</a>
+    <a href="contact.html" class="block text-gray-700 hover:text-blue-600">Contact Us</a>
+    <a href="review.php" class="block text-gray-700 hover:text-blue-600">Reviews</a>
+  </div>
+</nav>
+  <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      });
+  </script>
+  <!-- Hero / Our Story -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-indigo-50 via-purple-100 to-pink-50">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center gap-12">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1170&q=80" class="rounded-xl shadow-2xl" />
+      <div>
+        <h2 class="text-4xl font-extrabold text-gray-800 mb-6">Our Student Journey</h2>
+        <p class="text-gray-600 mb-4">We're a group of computer science students who struggled with maintaining good habits while balancing academics, work, and personal life. We built HabitBuddy to solve this problem for ourselves and others.</p>
+        <p class="text-gray-600 mb-6">Born from late-night coding and passion for personal growth, HabitBuddy is your free, student-friendly tool to build better habits.</p>
+        <div class="flex items-center">
+          <div class="bg-blue-100 p-3 rounded-full mr-4">
+            <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+          </div>
+          <p class="text-gray-600">Built by students, for students (and everyone else too!)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why HabitBuddy Works -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-center mb-16">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500">
+          Why HabitBuddy Works
+        </span>
+      </h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="bg-white/70 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-gray-200 hover:shadow-2xl hover:scale-105 transition-transform duration-300">
+          <div class="bg-gradient-to-br from-purple-500 to-indigo-500 p-3 rounded-full w-14 h-14 flex items-center justify-center text-white mb-6">
+            <i class="fas fa-brain text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Habit Science</h3>
+          <p class="text-gray-600">We use proven behavioral psychology to help you form real, lasting habits.</p>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-gray-200 hover:shadow-2xl hover:scale-105 transition-transform duration-300">
+          <div class="bg-gradient-to-br from-green-400 to-green-600 p-3 rounded-full w-14 h-14 flex items-center justify-center text-white mb-6">
+            <i class="fas fa-mobile-alt text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Student-Friendly</h3>
+          <p class="text-gray-600">Lightweight, easy to use, and designed to fit a student's schedule.</p>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-gray-200 hover:shadow-2xl hover:scale-105 transition-transform duration-300">
+          <div class="bg-gradient-to-br from-yellow-400 to-orange-500 p-3 rounded-full w-14 h-14 flex items-center justify-center text-white mb-6">
+            <i class="fas fa-wallet text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Completely Free</h3>
+          <p class="text-gray-600">We believe everyone should have access to habit-building tools without cost.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet The Team -->
+  <section class="py-20 bg-gradient-to-tr from-white via-purple-50 to-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold mb-16">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600">Meet the Developers</span>
+      </h2>
+      <div class="grid md:grid-cols-4 gap-10">
+        <!-- Repeat for each team member -->
+        <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-indigo-300 transition">
+          <img src="aditya.jpg" alt="Aditya" class="w-28 h-28 object-cover rounded-full border-4 border-indigo-300 mx-auto mb-4" />
+          <h3 class="text-lg font-bold">Aditya Thakur</h3>
+          <p class="text-indigo-600">B.Tech CSE</p>
+          <p class="text-gray-600">LPU</p>
+          <div class="flex justify-center mt-3 space-x-3">
+            <a href="https://github.com/adityathakur-cse" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ad1tyathakur/" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-indigo-300 transition">
+          <img src="shubh.jpg" alt="Aditya" class="w-28 h-28 object-cover rounded-full border-4 border-indigo-300 mx-auto mb-4" />
+          <h3 class="text-lg font-bold">Shubh Sahu</h3>
+          <p class="text-indigo-600">B.Tech CSE</p>
+          <p class="text-gray-600">LPU</p>
+          <div class="flex justify-center mt-3 space-x-3">
+            <a href="#" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-github"></i></a>
+            <a href="#" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-indigo-300 transition">
+          <img src="yuvraj.jpg" alt="Aditya" class="w-28 h-28 object-cover rounded-full border-4 border-indigo-300 mx-auto mb-4" />
+          <h3 class="text-lg font-bold">Yuraj Singh Shekhawat</h3>
+          <p class="text-indigo-600">B.Tech CSE</p>
+          <p class="text-gray-600">LPU</p>
+          <div class="flex justify-center mt-3 space-x-3">
+            <a href="#" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-github"></i></a>
+            <a href="#" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-indigo-300 transition">
+          <img src="anil.jpg" alt="Aditya" class="w-28 h-28 rounded-full border-4 border-indigo-300 mx-auto object-cover mb-4" />
+          <h3 class="text-lg font-bold">Anil Kumar</h3>
+          <p class="text-indigo-600">B.Tech CSE</p>
+          <p class="text-gray-600">LPU</p>
+          <div class="flex justify-center mt-3 space-x-3">
+            <a href="#" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-github"></i></a>
+            <a href="#" class="text-gray-400 hover:text-indigo-500"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="relative py-20 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')]"></div>
+    <div class="container mx-auto px-6 text-center relative z-10">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight mb-6">
+        Ready to <span class="text-purple-600">build better habits?</span>
+      </h2>
+      <p class="text-gray-600 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+        Join thousands improving their routines with <span class="font-semibold text-blue-600">HabitBuddy</span>.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <button onclick="window.location.href='index.php'" class="bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:from-purple-600 hover:to-blue-700 transition duration-300">
+          Get Started
+        </button>
+        <button onclick="window.location.href='contact.html'" class="bg-white text-blue-600  font-semibold py-3 px-8 rounded-full hover:bg-blue-50 transition duration-300 shadow">
+          Contact Us
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+      <div>
+        <h3 class="text-xl font-semibold mb-4">HabitBuddy</h3>
+        <p class="text-gray-400">Your personal habit companion.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="myhabit.php" class="text-gray-400 hover:text-white">Habit</a></li>
+          <li><a href="session.html" class="text-gray-400 hover:text-white">Session</a></li>
+          <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+          <li><a href="review.php" class="text-gray-400 hover:text-white">Reviews</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+        <div class="flex space-x-4 mb-4">
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+        </div>
+        <p class="text-gray-400">contact@habitbuddy.app</p>
+        <p class="text-gray-400">Made with ❤️ by students</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+      <p>&copy; 2025 HabitBuddy. All rights reserved.</p>
+    </div>
+  </footer>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Counter animation
+        function animateCounter(id, target, duration = 2000) {
+            const element = document.getElementById(id);
+            const start = 0;
+            const increment = target / (duration / 16); // 60fps
+            
+            let current = start;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    clearInterval(timer);
+                    current = target;
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 16);
+        }
+
+        // Animate counters when stats section is in view
+        function handleIntersection(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('users-counter', 100);
+                    animateCounter('habits-counter', 300);
+                    animateCounter('streaks-counter', 250);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(handleIntersection);
+        const statsSection = document.querySelector('#users-counter').parentElement.parentElement.parentElement;
+        observer.observe(statsSection);
+    </script>
+</body>
+</html>

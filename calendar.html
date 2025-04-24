@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--  -->
+    <meta
+    name="description"
+    content="Stay organized with our user-friendly Calendar featuring events, reminders, and a customizable interface. Built with HTML, CSS, and JavaScript. Start scheduling today!"
+  />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="style.css">
+    <link rel="stylesheet"  href="nav.css">
+
+    <style>
+        
+          /* ensure it is applied dynamically to the selected or correct  day using  js  */
+         .active1 { 
+        position: relative;
+        background-color: #ca83d4;   
+        color: white;
+        font-size: xx-large;
+        font-weight: bold;
+        }
+        
+
+     .active1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 10px 2px #8b5cf6;
+        } 
+        
+
+        .event{
+            position: relative;
+        }
+
+         .event::after{
+            content: "";
+            position: absolute;
+            bottom: 10%;
+            left: 50%; /*Positions them starting from bwteen  .calendar to 50% outside of calender*/
+            width: 75%;
+            height: 6px;
+            border-radius: 30px;
+            transform: translate(-50%);  /*By default, translate() works on the X-axis if only one value is provided.    Since .event::after is 75% of .day, it moves  it left by 37.5% of .day's width(half of its width).*/
+            background-color: #825fd6cb;
+        }
+
+        .event:hover::after{
+            background-color: #fff;
+            
+        }
+        .active1.event::after{
+            background-color: #fff;
+            
+        }
+
+
+        .today{
+            font-size: xx-large;
+            font-weight: 400;
+            color:#d696c9;
+        }
+        .active1.today{
+            color: #fff;
+        }
+
+
+        .calender::before,.calender::after{
+           content: "";
+           position: absolute;
+           top:50%;
+           left:100%; /* Positions them just outside the right edge of .calendar*/
+           width: 12px;
+           height: 97%;
+           border-radius: 0 5px 5px 0; /* Smooth rounded right edges */
+           background-color: #d3d4d6; /* Light gray color */
+           transform: translateY(-50%); /* Centering it vertically */
+        }
+        .calender::before{
+            height: 94%;
+            left: calc(100% + 12px);
+            background-color: rgb(153, 153, 153);
+        }
+            
+    </style>
+
+
+</head>
+<body>
+<!-- Navbar -->
+<nav class="bg-black/30 backdrop-blur-md shadow-md w-full fixed top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Logo -->
+        <div class="flex justify-center space-x-12 items-center h-16 ">
+          <div class=" text-2xl font-bold text-white hover:text-yellow-300"><a href="index.php">HabitBuddy</a></div>
+        <!-- Desktop Menu -->
+          <div class="hidden md:flex space-x-6">
+              <a href="calendar.html" class="text-white underline underline-offset-8 hover:text-yellow-300">Calendar</a>
+              <a href="session.html" class="text-white hover:text-yellow-300">Session</a>
+              <a href="about.html" class="text-white hover:text-yellow-300">About Us</a>
+              <a href="contact.html" class="text-white hover:text-yellow-300">Contact Us</a>
+              <a href="review.php" class="text-white hover:text-yellow-300">Reviews</a>
+          </div>
+        <!-- Mobile Toggle Button -->
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+          <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  
+     <!-- Mobile Menu -->
+     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="calendar.html" class="block text-white hover:text-yellow-300">Calendar</a>
+      <a href="session.html" class="block text-white hover:text-yellow-300">Session</a>
+      <a href="about.html" class="block text-white hover:text-yellow-300">About Us</a>
+      <a href="contact.html" class="block text-white hover:text-yellow-300">Contact Us</a>
+      <a href="review.php" class="block text-white hover:text-yellow-300">Reviews</a>
+    </div>
+  </nav>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+  
+        menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+  
+<section class="Hide min-h-screen flex items-center justify-center bg-black pt-12 ">
+
+    <div class="container relative  p-4 flex  text-white bg-slate-800 rounded-md" >
+        <div class="left w-[60%] "> <!-- This <div> represents the left section of the webpage. -->
+            <div class="calender relative w-full h-full text-gray-400 bg-white">
+                <div class="month w-[100%] h-[150px] flex items-center justify-between px-20 font-medium capitalize">
+                    <i class="prev fa fa-angle-left  cursor-pointer hover:text-blue-500"></i>
+                    <div class="date"> <!--novemeber 2025 (using js)--> </div>
+                    <i class="next fa fa-angle-right cursor-pointer hover:text-blue-500"></i>
+                </div>
+                <div class="weekdays w-full grid grid-cols-7  gap-4 px-2 pr-4 mb-4 font-medium">
+                    <div class="min-w-[50%] flex items-center justify-center">Sun</div>
+                    <div class="min-w-[50%] flex items-center justify-center">Mon</div>
+                    <div class="min-w-[50%] flex items-center justify-center">Tue</div>
+                    <div class="min-w-[50%] flex items-center justify-center">Wed</div>
+                    <div class="min-w-[50%] flex items-center justify-center ">Thu</div>
+                    <div class="min-w-[50%] flex items-center justify-center">Fri</div>
+                    <div class="min-w-[50%] flex items-center justify-center">Sat</div>
+                </div>
+                <div class="days grid grid-cols-7 gap-1 cursor-pointer px-2">
+                    <!-- we will add this days with the help of js -->
+                </div>
+
+
+                <!--This <div class="goto-today"> section is used to provide navigation controls for the calendar  -->
+             <div class="goto-today w-full min-w-[60%] h-[50px] flex items-center justify-between gap-4 px-2">
+                <div class="goto relative">
+                    <input type="text" placeholder="mm/yyyy" class="date-input text-gray-900 border-2 border-gray-800 rounded-md h-8 p-3 cursor-pointer"/> <!--When clicked, it navigates the calendar to the entered month and year.-->
+                    <button class="goto-btn  border-l-2 border-gray-900 hover:text-white hover:bg-purple-400  absolute top-1/2 right-0.5 transform -translate-y-1/2   text-sm w-8 h-7 cursor-pointer ">go</button>
+
+                </div>
+
+                <button class="today-btn border-2 border-gray-800 hover:text-white hover:bg-purple-400  px-2 rounded-md cursor-pointer h-8"> Today </button>
+
+             </div>
+
+
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="today-date">
+                <div class="event-day">Wed</div>
+                <div class="event-date">16 November 2022</div>
+            </div>
+            <div class="events1">
+                 <!-- we will add event through js  -->
+            </div>
+
+            <div class="add-event-box absolute bottom-16 left-[50%] transform -translate-x-1/2 mx-5 w-[90%] max-h-0 rounded-md bg-white text-gray-400  transition-all duration-300  ease-in-out overflow-hidden ">
+                <div class="add-event-header  flex justify-between text-gray-900 p-2">
+                    <h2 class="title font-medium ">Add Habit</h2>
+                    <i class="fas fa-times close  text-xl hover:text-blue-500 cursor-pointer"></i>
+                </div>
+
+                 
+                <div class="add-event-body ">
+                    <div class="add-event-input text-gray-900">
+                        <input type="text" placeholder="Habit Name" name="Habit_name" class="event-name m-2   focus:outline-none hover:border-b-2 hover:border-gray-500">
+                        <input type="text" placeholder="Habit Time From" name="Habit_time_from" class="event-time-form m-2 focus:outline-none hover:border-b-2 hover:border-gray-500">
+                        <input type="text" placeholder="Habit Time To" name="Habit_time_to" class="event-time-to m-2 focus:outline-none hover:border-b-2 hover:border-gray-500">
+
+                    </div>
+                </div>
+
+                <div class="add-event-footer m-4 flex justify-center">
+                    <button  type="submit" name="add_Habit" class="add-event-btn border border-gray-500 rounded-md p-1 px-2 bg-purple-400  text-white hover:bg-transparent hover:text-purple-400  cursor-pointer ">add habit</button>
+                </div>
+
+                
+            </div>
+
+        </div>
+
+        <button class="add-event-icon absolute bottom-8 right-6   w-6 h-6 text-6 text-white hover:bg-gray-400 rounded-full cursor-pointer ">
+            <i class="fas fa-plus "></i>
+        </button>
+
+    </div>
+    </section>
+    <script src="hi.js">
+    </script>
+    <script>
+        document.querySelector('.add-event-btn').addEventListener('click', function () {
+        const name = document.querySelector('.event-name').value;
+        const timeFrom = document.querySelector('.event-time-form').value;
+        const timeTo = document.querySelector('.event-time-to').value;
+        const date = document.querySelector('.event-date').innerText; // make sure to convert this to yyyy-mm-dd format if needed
+            
+        fetch('add_habit.php', {
+            method: 'POST',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `habit_name=${encodeURIComponent(name)}&time_from=${encodeURIComponent(timeFrom)}&time_to=${encodeURIComponent(timeTo)}&habit_date=${encodeURIComponent(date)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Habit added!");
+            } else {
+                alert("Error saving habit: " + data.error);
+            }
+        })
+        .catch(err => {
+            alert("Network error.");
+            console.error(err);
+        });
+    });
+
+    </script>
+</body>
+</html>
